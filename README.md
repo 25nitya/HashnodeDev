@@ -10,7 +10,7 @@ A modern full-stack developer publishing and blogging platform inspired by Hashn
 - **User Authentication:** Secure JWT-based registration, login, profile management, and password reset flows.
 - **Article Publishing:** Markdown-supported rich blogging editor with support for draft and published workflows.
 - **Tagging & Filtering:** Categorize articles with dynamic topic tags and slug-based routing.
-- **Responsive UI:** Clean interface with dark/light visual clarity and responsive navigation.
+- **Responsive UI:** Clean interface with  visual clarity.
 - **Async Database Architecture:** High-throughput non-blocking queries powered by Motor and MongoDB Atlas with automated indexing.
 
 ---
