@@ -43,6 +43,8 @@ HashnodeDev/
 ├── .gitignore
 └── README.md
 
+---
+
 ## ⚙️ Getting Started
 
 ### Prerequisites
