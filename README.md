@@ -42,3 +42,37 @@ HashnodeDev/
 │   └── requirements.txt
 ├── .gitignore
 └── README.md
+
+## ⚙️ Getting Started
+
+### Prerequisites
+- Python 3.10+
+- Node.js 18+ & npm
+- MongoDB Atlas cluster URI
+
+---
+
+### 1. Clone the Repository
+```bash
+git clone [https://github.com/25nitya/HashnodeDev.git](https://github.com/25nitya/HashnodeDev.git)
+cd HashnodeDev
+
+#Backend Setup
+cd server
+python3 -m venv venv
+source venv/bin/activate   # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
+
+# Create a .env file inside server/ with:
+# MONGO_URI=your_mongodb_atlas_uri
+# JWT_SECRET=your_jwt_secret_key
+# FRONTEND_URL=http://localhost:5173
+
+uvicorn app.main:app --reload --port 8000
+
+#Frontend Setup
+cd ../client
+npm install
+npm run dev
+
+The app will be running at http://localhost:5173, and the API docs will be available at http://localhost:8000/docs
