@@ -29,18 +29,25 @@ export default function Login() {
     try {
       await login(cleanEmail, cleanPassword);
       navigate('/dashboard');
-    } catch (err) {
-      const detail = err.response?.data?.detail;
-      if (Array.isArray(detail)) {
-        setError(detail.map((d) => d.msg || d.message).join(', '));
-      } else if (typeof detail === 'string') {
-        setError(detail);
-      } else if (err.message === 'Network Error') {
-        setError('Network error: Is FastAPI running on https://hashnodedev.onrender.com');
+    }  catch (err) {
+      if (err.response) {
+        // Backend reached and returned a status code (400, 401, 422, 500)
+        const detail = err.response.data?.detail;
+        if (Array.isArray(detail)) {
+          setError(detail.map((d) => d.msg || d.message).join(', '));
+        } else if (typeof detail === 'string') {
+          setError(detail);
+        } else {
+          setError(`Error (${err.response.status}): ${err.response.statusText || 'Authentication failed'}`);
+        }
+      } else if (err.request) {
+        // Network failed or preflight blocked
+        setError('Cannot reach server. Please check your internet or CORS configuration.');
       } else {
-        setError('Invalid email or password. Please try again.');
+        setError(err.message || 'An unexpected error occurred.');
       }
-    } finally {
+    }
+     finally {
       setIsSubmitting(false);
     }
   };
@@ -66,7 +73,7 @@ export default function Login() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none transition"
-              placeholder="you@example.com"
+              placeholder=""
             />
           </div>
 
