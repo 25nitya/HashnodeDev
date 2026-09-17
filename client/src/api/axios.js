@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://hashnodedev.onrender.com',
+  baseURL: 'https://hashnodedev.onrender.com/api',
 });
 
 // Attach JWT token to every outgoing request

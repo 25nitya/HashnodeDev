@@ -20,7 +20,10 @@ export function AuthProvider({ children }) {
       api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
       try {
-        const res = await api.get('/auth/me');
+        const res = await axios.post('https://hashnodedev.onrender.com/api/auth/login', {
+  email: cleanEmail,
+  password: cleanPassword,
+});
         setUser(res.data);
       } catch (err) {
         console.error('Session expired or invalid token:', err);
