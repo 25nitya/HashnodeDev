@@ -36,7 +36,7 @@ export default function Login() {
       } else if (typeof detail === 'string') {
         setError(detail);
       } else if (err.message === 'Network Error') {
-        setError('Network error: Is FastAPI running on http://localhost:8000?');
+        setError('Network error: Is FastAPI running on https://hashnodedev.onrender.com');
       } else {
         setError('Invalid email or password. Please try again.');
       }
