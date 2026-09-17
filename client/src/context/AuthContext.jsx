@@ -16,14 +16,12 @@ export function AuthProvider({ children }) {
         return;
       }
 
-      // Attach token to axios headers before calling /auth/me
+      // Attach token to axios instance headers
       api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
       try {
-        const res = await axios.post('https://hashnodedev.onrender.com/api/auth/login', {
-  email: cleanEmail,
-  password: cleanPassword,
-});
+        // Call your session/profile endpoint, not login
+        const res = await api.get('/auth/me');
         setUser(res.data);
       } catch (err) {
         console.error('Session expired or invalid token:', err);
@@ -38,17 +36,15 @@ export function AuthProvider({ children }) {
     checkAuth();
   }, []);
 
-  // 2. Login function: stores the raw string token and sets header
+  // 2. Login function
   const login = async (email, password) => {
     const cleanEmail = email.trim().toLowerCase();
     const res = await api.post('/auth/login', { email: cleanEmail, password });
     
-    // In auth_routes.py, UserResponse returns token inside res.data.token
     const { token, ...userData } = res.data;
 
     if (token) {
       localStorage.setItem('token', token);
-      // Immediately set the header on axios so next requests succeed
       api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     }
     setUser(userData);
