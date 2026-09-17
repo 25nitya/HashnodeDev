@@ -17,8 +17,8 @@ load_dotenv()
 
 # Initialize Resend
 resend.api_key = os.getenv("RESEND_API_KEY", "")
-EMAIL_FROM = os.getenv("EMAIL_FROM", "support@hashnodedev.work.gd")
-FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:5173")
+EMAIL_FROM = os.getenv("EMAIL_FROM", "noreply@hashnodedev.work.gd")
+FRONTEND_URL = os.getenv("FRONTEND_URL", "https://hashnodedev-frontend.onrender.com").rstrip("/")
 
 router = APIRouter(prefix="/api/auth", tags=["Auth"])
 
